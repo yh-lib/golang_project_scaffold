@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"golang_project_scaffold/config"
 	"golang_project_scaffold/utils/jwtutils"
+	"golang_project_scaffold/utils/logs"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,6 +20,12 @@ func main() {
 	// 测试jwt解析token
 	c1, _ := jwtutils.ParseToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxpeWFvaHVpIiwiaXNzIjoiZG90YmFsbyIsInN1YiI6ImR1a3VhbiIsImV4cCI6MTc3MTQyODE4OSwibmJmIjoxNzcxNDIwOTg5LCJpYXQiOjE3NzE0MjA5ODl9.JJWLjWDNf_Zyw-ok7eM8yHtP35lF1FVq0ti-VdB8STM")
 	fmt.Println(c1)
+	// 3. 查看日志输出效果
+	testMap := map[string]interface{}{
+		"字段1": "值1",
+		"字段2": []int{1, 2, 3, 4, 5},
+	}
+	logs.Warning(testMap, "确认下效果")
 	// 9. 启动程序
 	r.Run(config.Port)
 }
