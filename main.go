@@ -2,16 +2,23 @@
 package main
 
 import (
+	"fmt"
 	"golang_project_scaffold/config"
+	"golang_project_scaffold/utils/jwtutils"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// step1 开始加载程序配置
-	// import golang_project_scaffold/config
-
-	// step2 配置 gin
+	// 1. 加载程序的配置
+	// 2. 配置gin
 	r := gin.Default()
+	// 测试jwt生成token
+	ss, _ := jwtutils.GenToken("liyaohui")
+	fmt.Println("token值为:", ss)
+	// 测试jwt解析token
+	c1, _ := jwtutils.ParseToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxpeWFvaHVpIiwiaXNzIjoiZG90YmFsbyIsInN1YiI6ImR1a3VhbiIsImV4cCI6MTc3MTQyODE4OSwibmJmIjoxNzcxNDIwOTg5LCJpYXQiOjE3NzE0MjA5ODl9.JJWLjWDNf_Zyw-ok7eM8yHtP35lF1FVq0ti-VdB8STM")
+	fmt.Println(c1)
+	// 9. 启动程序
 	r.Run(config.Port)
 }
