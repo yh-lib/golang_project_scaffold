@@ -47,12 +47,12 @@ func initLogConfig(logLevel string) {
 func init() {
 	logs.Info(nil, "Start loading the program configuration...")
 	// 配置环境变量默认值
-	viper.SetDefault("LOG_LEVEL", "debug")     // 日志输出级别
-	viper.SetDefault("PORT", ":8080")          // 程序监听端口
-	viper.SetDefault("JWT_SIGN_KEY", "dukuan") // 获取jwt加密的secret
-	viper.SetDefault("JWT_EXPIRE_TIME", 120)   // 获取jwt过期时间
-	viper.SetDefault("USERNAME", "Admin")
-	viper.SetDefault("PASSWORD", "Admin123")
+	viper.SetDefault("LOG_LEVEL", "debug")                           // 日志输出级别
+	viper.SetDefault("PORT", ":8080")                                // 程序监听端口
+	viper.SetDefault("JWT_SIGN_KEY", "这里放加密用的secret")                // 获取jwt加密的secret
+	viper.SetDefault("JWT_EXPIRE_TIME", 120)                         // 获取jwt过期时间
+	viper.SetDefault("USERNAME", "9818af84da6f96579e99ed315f69e0c5") // 默认用户名：YH	通过MD5加密
+	viper.SetDefault("PASSWORD", "0192023a7bbd73250516f069df18b500") // 默认密码：admin123	通过MD5加密
 	// 绑定环境变量到配置
 	viper.AutomaticEnv()
 	// 获取环境变量值并绑定到程序变量

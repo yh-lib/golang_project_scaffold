@@ -9,8 +9,8 @@ import (
 )
 
 type UserInfo struct {
-	Username string `json:username`
-	Password string `json:password`
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 func Login(r *gin.Context) {
