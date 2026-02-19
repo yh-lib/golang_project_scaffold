@@ -20,6 +20,8 @@ var (
 	// Jwt 签名
 	JwtSignKey string
 	JwtExpTime int64 // jwt token 过期时间，单位：分钟
+	Username   string
+	Password   string
 )
 
 // 配置日志输出格式
@@ -49,6 +51,8 @@ func init() {
 	viper.SetDefault("PORT", ":8080")          // 程序监听端口
 	viper.SetDefault("JWT_SIGN_KEY", "dukuan") // 获取jwt加密的secret
 	viper.SetDefault("JWT_EXPIRE_TIME", 120)   // 获取jwt过期时间
+	viper.SetDefault("USERNAME", "Admin")
+	viper.SetDefault("PASSWORD", "Admin123")
 	// 绑定环境变量到配置
 	viper.AutomaticEnv()
 	// 获取环境变量值并绑定到程序变量
@@ -56,6 +60,8 @@ func init() {
 	Port = viper.GetString("PORT")
 	JwtSignKey = viper.GetString("JWT_SIGN_KEY")
 	JwtExpTime = viper.GetInt64("JWT_EXPIRE_TIME")
+	Username = viper.GetString("USERNAME") // 获取用户名
+	Password = viper.GetString("PASSWORD") // 获取密码
 	// 加载日志输出级别
 	initLogConfig(logLevel)
 	// 日志格式加载完成提示
