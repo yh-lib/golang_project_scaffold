@@ -3,6 +3,8 @@ package config
 
 import (
 	"golang_project_scaffold/utils/logs"
+	"path"
+	"runtime"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -56,7 +58,15 @@ func initLogConfig(logLevel string) {
 	// 添加文件名和行号
 	logrus.SetReportCaller(true)
 	// 配置日志输出为json格式
-	logrus.SetFormatter(&logrus.JSONFormatter{TimestampFormat: timeFormat})
+	// 原先："file":"D:/Workspace/BaiduSyncdisk/MyNotes/2_IT/DEV/golang/goStudySrc/src/golang_project_scaffold/utils/logs/logs.go:11"
+	// 改为："file":"logs.go"
+	logrus.SetFormatter(&logrus.JSONFormatter{
+		TimestampFormat: timeFormat,
+		CallerPrettyfier: func(f *runtime.Frame) (function string, file string) {
+			fileName := path.Base(f.File)
+			return f.Function, fileName
+		},
+	})
 
 }
 
