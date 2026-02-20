@@ -3,6 +3,7 @@ package main
 
 import (
 	"golang_project_scaffold/config"
+	"golang_project_scaffold/middlerwares"
 	"golang_project_scaffold/routers"
 
 	"github.com/gin-gonic/gin"
@@ -12,6 +13,7 @@ func main() {
 	// 1. 加载程序的配置
 	// 2. 配置gin
 	r := gin.Default()
+	r.Use(middlerwares.JwtAuth)
 	// // 测试jwt生成token
 	// ss, _ := jwtutils.GenToken("liyaohui")
 	// fmt.Println("token值为:", ss)

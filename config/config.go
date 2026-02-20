@@ -24,6 +24,22 @@ var (
 	Password   string
 )
 
+// 规范返回给前端的数据
+type ReturnData struct {
+	Status  int                    `json:"status"`
+	Message string                 `json:"message"`
+	Data    map[string]interface{} `json:"data"`
+}
+
+// 构造函数
+func NewRetrunData() ReturnData {
+	returnData := ReturnData{}
+	returnData.Status = 200
+	data := make(map[string]interface{})
+	returnData.Data = data
+	return returnData
+}
+
 // 配置日志输出格式
 func initLogConfig(logLevel string) {
 	// 控制日志的输出级别
