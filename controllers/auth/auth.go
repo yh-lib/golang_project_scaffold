@@ -15,13 +15,13 @@ type UserInfo struct {
 
 var returnData = config.NewRetrunData()
 
-func Login(r *gin.Context) {
+func Login(c *gin.Context) {
 	// 1. 获取前端传递的用户名和密码
 	userInfo := UserInfo{}
-	if err := r.ShouldBindJSON(&userInfo); err != nil {
+	if err := c.ShouldBindJSON(&userInfo); err != nil {
 		returnData.Status = 401
 		returnData.Message = err.Error()
-		r.JSON(200, returnData)
+		c.JSON(200, returnData)
 		return
 	}
 	logs.Debug(map[string]interface{}{"用户名": userInfo.Username, "密码": userInfo.Password}, "开始验证登录信息")
@@ -35,7 +35,7 @@ func Login(r *gin.Context) {
 			logs.Error(map[string]interface{}{"用户名": userInfo.Username, "错误信息": err}, "用户名密码正确,但生成toke失败.")
 			returnData.Status = 401
 			returnData.Message = "生成token失败:"
-			r.JSON(200, returnData)
+			c.JSON(200, returnData)
 			return
 		}
 		// token 正常生成，返回给前端
@@ -43,20 +43,20 @@ func Login(r *gin.Context) {
 		returnData.Status = 200
 		returnData.Message = "生成token成功"
 		returnData.Data["token"] = jwtToken
-		r.JSON(200, returnData)
+		c.JSON(200, returnData)
 		return
 	} else {
 		// 认证失败,用户名密码错误
 		returnData.Status = 401
 		returnData.Message = "认证失败：用户名或密码错误."
-		r.JSON(200, returnData)
+		c.JSON(200, returnData)
 	}
 }
 
-func Logout(r *gin.Context) {
+func Logout(c *gin.Context) {
 	// 退出
 	returnData.Status = 200
 	returnData.Message = "退出成功"
-	r.JSON(200, returnData)
+	c.JSON(200, returnData)
 	logs.Debug(nil, "用户已退出.")
 }

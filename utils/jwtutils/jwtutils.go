@@ -27,8 +27,8 @@ func GenToken(username string) (string, error) {
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add((time.Minute * time.Duration(config.JwtExpTime)))), // token 过期时间
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
 			NotBefore: jwt.NewNumericDate(time.Now()),
-			Issuer:    "dotbalo", // 签发人
-			Subject:   "dukuan",
+			Issuer:    "YH", // 签发人
+			Subject:   "YH",
 		},
 	}
 	// 使用指定的签名方法创建签名对象
